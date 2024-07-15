@@ -10,6 +10,8 @@ YELLOW = ("light goldenrod")
 FPS = 100
 clock = pygame.time.Clock()
 x = 400
+q = 0
+w = 0
 
 # Размеры экрана
 screen_width = 800
@@ -75,33 +77,26 @@ def moove_pizza():
     global x, pizza
     for i in range(50):    
         x += 5
+        time.sleep(0.1)
 
 
 # Основной цикл программы
 running = True
 while running:
     clock.tick(FPS)
-    screen.fill(GOLD)
-    pizza = pygame.draw.circle(screen, YELLOW, (x, 300), size_pizza)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
             if button_x <= mouse_pos[0] <= button_x + button_width and button_y <= mouse_pos[1] <= button_y + button_height:
-                print("Кнопка нажата!")
+                q += 1
             if button_x6 <= mouse_pos[0] <= button_x6 + button_width6 and button_y6 <= mouse_pos[1] <= button_y6 + button_height6:
-                #moove_pizza()
-                for i in range(20):    
-                    x += 5
-                time.sleep(1)
-                for i in range(20):    
-                    x += 5
-                time.sleep(1)
-                for i in range(20):    
-                    x += 5
+                w += 1
+            #if button_x1 <= mouse_pos[0] <= button_x1 + button_width1 and button_y1 <= mouse_pos[1] <= button_y1 + button_height1:
 
 
+    screen.fill(GOLD)
     
     pygame.draw.rect(screen, WHITE, (button_x, button_y, button_width, button_height))
     screen.blit(text, (button_x + 2, button_y + 10))
@@ -119,7 +114,14 @@ while running:
     screen.blit(text6, (button_x6 + 40, button_y6 + 7))
     
     #создание теста
-    #pizza = pygame.draw.circle(screen, YELLOW, (x, 300), size_pizza)
+    pizza = pygame.draw.circle(screen, YELLOW, (x, 300), size_pizza)
+    if q >= 1:
+
+    #создание соуса    
+        pygame.draw.circle(screen, "tomato", (x, 300), size_pizza - 10)
+    if w >= 1:
+        x += 2
+        time.sleep(0.02)
 
     pygame.display.flip()
 
