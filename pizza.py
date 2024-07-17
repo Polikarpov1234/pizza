@@ -12,6 +12,7 @@ clock = pygame.time.Clock()
 x = 400
 q = 0
 w = 0
+e = 0
 
 # Размеры экрана
 screen_width = 800
@@ -73,13 +74,6 @@ button_y6 = 520
 option_size_pizza = (70, 85, 100)
 size_pizza = random.choice(option_size_pizza)
 
-def moove_pizza():
-    global x, pizza
-    for i in range(50):    
-        x += 5
-        time.sleep(0.1)
-
-
 # Основной цикл программы
 running = True
 while running:
@@ -93,8 +87,8 @@ while running:
                 q += 1
             if button_x6 <= mouse_pos[0] <= button_x6 + button_width6 and button_y6 <= mouse_pos[1] <= button_y6 + button_height6:
                 w += 1
-            #if button_x1 <= mouse_pos[0] <= button_x1 + button_width1 and button_y1 <= mouse_pos[1] <= button_y1 + button_height1:
-
+            if button_x1 <= mouse_pos[0] <= button_x1 + button_width1 and button_y1 <= mouse_pos[1] <= button_y1 + button_height1:
+                e += 1
 
     screen.fill(GOLD)
     
@@ -115,13 +109,40 @@ while running:
     
     #создание теста
     pizza = pygame.draw.circle(screen, YELLOW, (x, 300), size_pizza)
-    if q >= 1:
 
-    #создание соуса    
+    #создание соуса 
+    if q >= 1:   
         pygame.draw.circle(screen, "tomato", (x, 300), size_pizza - 10)
+
+    if e >= 1:
+        pygame.draw.circle(screen, "red", (x, 300), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x + size_pizza/3, 300), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x + 2*size_pizza/3, 300), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x - size_pizza/3, 300), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x - 2*size_pizza/3, 300), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x, 300 + size_pizza/3), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x, 300 + 2*size_pizza/3), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x, 300 - size_pizza/3), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x, 300 - 2*size_pizza/3), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x + size_pizza/3.5, 300 + size_pizza/3.5), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x - size_pizza/3.5, 300 - size_pizza/3.5), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x - size_pizza/3.5, 300 + size_pizza/3.5), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x + size_pizza/3.5, 300 - size_pizza/3.5), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x + size_pizza/1.75, 300 + size_pizza/3.25), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x + size_pizza/3.25, 300 + size_pizza/1.75), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x - size_pizza/1.75, 300 - size_pizza/3.25), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x - size_pizza/3.25, 300 - size_pizza/1.75), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x + size_pizza/1.75, 300 - size_pizza/3.25), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x + size_pizza/3.25, 300 - size_pizza/1.75), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x - size_pizza/1.75, 300 + size_pizza/3.25), size_pizza/8)
+        pygame.draw.circle(screen, "red", (x - size_pizza/3.25, 300 + size_pizza/1.75), size_pizza/8)
+
+
     if w >= 1:
         x += 2
         time.sleep(0.02)
+
+    #создание пеперони
 
     pygame.display.flip()
 
